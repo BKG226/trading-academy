@@ -1,4 +1,24 @@
+"use client";
+
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../lib/firebase";
+
 export default function Connexion() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+
+      window.location.href = "/dashboard";
+    } catch (error: any) {
+      setMessage("Email ou mot de passe incorrect");
+    }
+  };
+
   return (
     <div
       style={{
@@ -30,6 +50,8 @@ export default function Connexion() {
         <input
           type="email"
           placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           style={{
             width: "100%",
             padding: "12px",
@@ -42,6 +64,8 @@ export default function Connexion() {
         <input
           type="password"
           placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           style={{
             width: "100%",
             padding: "12px",
@@ -51,22 +75,30 @@ export default function Connexion() {
           }}
         />
 
-        <a href="/dashboard">
-          <button
-            style={{
-              width: "100%",
-              background: "#2563eb",
-              color: "white",
-              border: "none",
-              padding: "14px",
-              borderRadius: "10px",
-              fontSize: "16px",
-            }}
-          >
-            Se connecter
-          </button>
-        </a>
+        <button
+          onClick={handleLogin}
+          style={{
+            width: "100%",
+            background: "#2563eb",
+            color: "white",
+            border: "none",
+            padding: "14px",
+            borderRadius: "10px",
+            fontSize: "16px",
+          }}
+        >
+          Se connecter
+        </button>
+
+        <p
+          style={{
+            marginTop: "20px",
+            color: "red",
+          }}
+        >
+          {message}
+        </p>
       </div>
     </div>
-  )
+  );
 }
