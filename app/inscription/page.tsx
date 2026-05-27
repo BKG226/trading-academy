@@ -1,4 +1,4 @@
-export default function Connexion() {
+export default function Inscription() {
   return (
     <div
       style={{
@@ -20,12 +20,24 @@ export default function Connexion() {
       >
         <h1
           style={{
-            color: "#2563eb",
+            color: "#16a34a",
             marginBottom: "20px",
           }}
         >
-          Connexion
+          Inscription
         </h1>
+
+        <input
+          type="text"
+          placeholder="Nom"
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "15px",
+            borderRadius: "10px",
+            border: "1px solid #ccc",
+          }}
+        />
 
         <input
           type="email"
@@ -55,7 +67,7 @@ export default function Connexion() {
           <button
             style={{
               width: "100%",
-              background: "#2563eb",
+              background: "#16a34a",
               color: "white",
               border: "none",
               padding: "14px",
@@ -63,7 +75,7 @@ export default function Connexion() {
               fontSize: "16px",
             }}
           >
-            Se connecter
+            Créer un compte
           </button>
         </a>
       </div>
