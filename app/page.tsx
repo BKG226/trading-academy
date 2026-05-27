@@ -2,182 +2,105 @@ export default function Home() {
   return (
     <div
       style={{
-        padding: "40px",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#111827",
       }}
     >
-      <h1
-        style={{
-          fontSize: "50px",
-          marginBottom: "20px",
-          color: "#111827",
-        }}
-      >
-        Trading Pro
-      </h1>
-
-      <h2
-        style={{
-          fontSize: "40px",
-          color: "#2563eb",
-        }}
-      >
-        Deviens un Trader Pro
-      </h2>
-
-      <p
-        style={{
-          fontSize: "22px",
-          marginTop: "20px",
-          maxWidth: "700px",
-          color: "#374151",
-        }}
-      >
-        Apprends le trading Forex, Crypto et les stratégies
-        professionnelles avec Trading Academy.
-      </p>
-
-      {/* Niveaux */}
       <div
         style={{
-          marginTop: "60px",
-          display: "flex",
-          gap: "20px",
-          flexWrap: "wrap",
+          background: "white",
+          padding: "40px",
+          borderRadius: "20px",
+          width: "350px",
+          textAlign: "center",
         }}
       >
-        {/* Débutant */}
-        <div
+        <h1
           style={{
-            background: "white",
-            padding: "25px",
-            borderRadius: "15px",
-            width: "300px",
-            boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+            color: "#2563eb",
+            marginBottom: "10px",
           }}
         >
-          <h3
-            style={{
-              color: "#16a34a",
-              fontSize: "28px",
-            }}
-          >
-            Débutant
-          </h3>
+          Trading Academy
+        </h1>
 
-          <p
-            style={{
-              color: "#374151",
-              marginTop: "15px",
-              fontSize: "18px",
-            }}
-          >
-            Apprends les bases du trading :
-            bougies japonaises, support/résistance,
-            gestion du risque et psychologie.
-          </p>
-
-          <div
-            style={{
-              marginTop: "20px",
-              display: "flex",
-              gap: "10px",
-              flexWrap: "wrap",
-            }}
-          >
-            <button
-              style={{
-                background: "#2563eb",
-                color: "white",
-                border: "none",
-                padding: "12px 20px",
-                borderRadius: "10px",
-                fontSize: "16px",
-              }}
-            >
-              Voir la formation
-            </button>
-
-            <button
-              style={{
-                background: "#16a34a",
-                color: "white",
-                border: "none",
-                padding: "12px 20px",
-                borderRadius: "10px",
-                fontSize: "16px",
-              }}
-            >
-              Commencer
-            </button>
-          </div>
-        </div>
-
-        {/* Intermédiaire */}
-        <div
+        <p
           style={{
-            background: "white",
-            padding: "25px",
-            borderRadius: "15px",
-            width: "300px",
-            boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+            color: "#6b7280",
+            marginBottom: "30px",
           }}
         >
-          <h3
+          Connecte-toi pour accéder à la plateforme
+        </p>
+
+        <input
+          type="email"
+          placeholder="Email"
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "15px",
+            borderRadius: "10px",
+            border: "1px solid #ccc",
+          }}
+        />
+
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "20px",
+            borderRadius: "10px",
+            border: "1px solid #ccc",
+          }}
+        />
+
+        <a href="/dashboard">
+          <button
             style={{
-              color: "#ea580c",
-              fontSize: "28px",
+              width: "100%",
+              background: "#2563eb",
+              color: "white",
+              border: "none",
+              padding: "14px",
+              borderRadius: "10px",
+              fontSize: "16px",
             }}
           >
-            Intermédiaire
-          </h3>
+            Se connecter
+          </button>
+        </a>
 
-          <p
+        <p
+          style={{
+            marginTop: "20px",
+            color: "#6b7280",
+          }}
+        >
+          Pas de compte ?
+        </p>
+
+        <a href="/inscription">
+          <button
             style={{
-              color: "#374151",
-              marginTop: "15px",
-              fontSize: "18px",
+              width: "100%",
+              background: "#16a34a",
+              color: "white",
+              border: "none",
+              padding: "14px",
+              borderRadius: "10px",
+              fontSize: "16px",
+              marginTop: "10px",
             }}
           >
-            Maîtrise la structure du marché,
-            les entrées précises, les sorties
-            et les stratégies avancées.
-          </p>
-
-          <div
-            style={{
-              marginTop: "20px",
-              display: "flex",
-              gap: "10px",
-              flexWrap: "wrap",
-            }}
-          >
-            <button
-              style={{
-                background: "#2563eb",
-                color: "white",
-                border: "none",
-                padding: "12px 20px",
-                borderRadius: "10px",
-                fontSize: "16px",
-              }}
-            >
-              Voir la formation
-            </button>
-
-            <button
-              style={{
-                background: "#ea580c",
-                color: "white",
-                border: "none",
-                padding: "12px 20px",
-                borderRadius: "10px",
-                fontSize: "16px",
-              }}
-            >
-              Commencer
-            </button>
-          </div>
-        </div>
+            Inscription
+          </button>
+        </a>
       </div>
     </div>
   )
