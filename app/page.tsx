@@ -33,34 +33,10 @@ export default function Home() {
             marginBottom: "30px",
           }}
         >
-          Connecte-toi pour accéder à la plateforme
+          Plateforme professionnelle de trading
         </p>
 
-        <input
-          type="email"
-          placeholder="Email"
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "15px",
-            borderRadius: "10px",
-            border: "1px solid #ccc",
-          }}
-        />
-
-        <input
-          type="password"
-          placeholder="Mot de passe"
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "20px",
-            borderRadius: "10px",
-            border: "1px solid #ccc",
-          }}
-        />
-
-        <a href="/dashboard">
+        <a href="/connexion">
           <button
             style={{
               width: "100%",
@@ -70,20 +46,12 @@ export default function Home() {
               padding: "14px",
               borderRadius: "10px",
               fontSize: "16px",
+              marginBottom: "15px",
             }}
           >
-            Se connecter
+            Connexion
           </button>
         </a>
-
-        <p
-          style={{
-            marginTop: "20px",
-            color: "#6b7280",
-          }}
-        >
-          Pas de compte ?
-        </p>
 
         <a href="/inscription">
           <button
@@ -95,7 +63,6 @@ export default function Home() {
               padding: "14px",
               borderRadius: "10px",
               fontSize: "16px",
-              marginTop: "10px",
             }}
           >
             Inscription
@@ -103,5 +70,5 @@ export default function Home() {
         </a>
       </div>
     </div>
-  )
+  );
 }
