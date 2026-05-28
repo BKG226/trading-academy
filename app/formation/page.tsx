@@ -70,17 +70,19 @@ export default function Formation() {
           <p style={{ color: "#4b5563", marginBottom: "15px" }}>
             Structure du marché, entrées, sorties, stratégies avancées
           </p>
-          <button style={{
-            background: "#ea580c",
-            color: "white",
-            border: "none",
-            padding: "12px 25px",
-            borderRadius: "10px",
-            fontSize: "15px",
-            cursor: "pointer",
-          }}>
-            Voir formation →
-          </button>
+          <a href="/formation/intermediaire">
+            <button style={{
+              background: "#ea580c",
+              color: "white",
+              border: "none",
+              padding: "12px 25px",
+              borderRadius: "10px",
+              fontSize: "15px",
+              cursor: "pointer",
+            }}>
+              Voir formation →
+            </button>
+          </a>
         </div>
 
       </div>
