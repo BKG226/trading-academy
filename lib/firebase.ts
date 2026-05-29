@@ -1,15 +1,19 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBdYDH23InHQJ2iYWs4rxOFJqyx_Da1c0E",
-  authDomain: "trading-academy-611f5.firebaseapp.com",
-  projectId: "trading-academy-611f5",
-  storageBucket: "trading-academy-611f5.firebasestorage.app",
-  messagingSenderId: "124846961162",
-  appId: "1:124846961162:web:6a8561c3872f057002e5f3",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+const app = !getApps().length
+  ? initializeApp(firebaseConfig)
+  : getApp();
 
 export const auth = getAuth(app);
+
+export default app;
