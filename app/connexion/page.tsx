@@ -1,7 +1,6 @@
 "use client";
+
 import { useState, useEffect } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../lib/firebase";
 
 export default function Connexion() {
   const [email, setEmail] = useState("");
@@ -10,11 +9,14 @@ export default function Connexion() {
   const [message, setMessage] = useState("");
 
   const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      window.location.href = "/dashboard";
-    } catch (error: any) {
-      setMessage("Email ou mot de passe incorrect");
+    if (email && password) {
+      setMessage("Connexion temporairement désactivée");
+
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 1000);
+    } else {
+      setMessage("Remplissez les champs");
     }
   };
 
@@ -83,7 +85,6 @@ export default function Connexion() {
             Connexion
           </h2>
 
-          {/* EMAIL */}
           <div style={{ width: "100%", marginBottom: "15px" }}>
             <label style={{ color: "#60a5fa", fontSize: "12px" }}>Email</label>
             <input
@@ -104,7 +105,6 @@ export default function Connexion() {
             />
           </div>
 
-          {/* MOT DE PASSE */}
           <div style={{ width: "100%", marginBottom: "20px", position: "relative" }}>
             <label style={{ color: "#f87171", fontSize: "12px" }}>Mot de passe</label>
             <input
@@ -138,7 +138,6 @@ export default function Connexion() {
             </span>
           </div>
 
-          {/* BOUTON */}
           <button
             onClick={handleLogin}
             style={{
@@ -156,11 +155,11 @@ export default function Connexion() {
             Se connecter
           </button>
 
-          {/* LIENS */}
           <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
             <span style={{ color: "#9ca3af", fontSize: "12px", cursor: "pointer" }}>
               Mot de passe oublié ?
             </span>
+
             <a href="/inscription" style={{ color: "#9ca3af", fontSize: "12px" }}>
               S'inscrire
             </a>
