@@ -1,22 +1,45 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../../lib/firebase";
 
 export default function Connexion() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
+  const [messageColor, setMessageColor] = useState("red");
+  const [resetMode, setResetMode] = useState(false);
 
   const handleLogin = async () => {
-    if (email && password) {
-      setMessage("Connexion temporairement désactivée");
+    if (!email || !password) {
+      setMessageColor("red");
+      setMessage("Remplissez tous les champs");
+      return;
+    }
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      window.location.href = "/dashboard";
+    } catch (error: any) {
+      setMessageColor("red");
+      setMessage("Email ou mot de passe incorrect");
+    }
+  };
 
-      setTimeout(() => {
-        window.location.href = "/dashboard";
-      }, 1000);
-    } else {
-      setMessage("Remplissez les champs");
+  const handleResetPassword = async () => {
+    if (!email) {
+      setMessageColor("red");
+      setMessage("Entrez votre email d'abord");
+      return;
+    }
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setMessageColor("#34d399");
+      setMessage("Email de réinitialisation envoyé ! Vérifiez votre boite mail.");
+      setResetMode(false);
+    } catch (error: any) {
+      setMessageColor("red");
+      setMessage("Email introuvable — vérifiez l'adresse");
     }
   };
 
@@ -82,9 +105,10 @@ export default function Connexion() {
           boxSizing: "border-box",
         }}>
           <h2 style={{ color: "white", fontSize: "24px", marginBottom: "20px" }}>
-            Connexion
+            {resetMode ? "Mot de passe oublié" : "Connexion"}
           </h2>
 
+          {/* EMAIL */}
           <div style={{ width: "100%", marginBottom: "15px" }}>
             <label style={{ color: "#60a5fa", fontSize: "12px" }}>Email</label>
             <input
@@ -105,45 +129,51 @@ export default function Connexion() {
             />
           </div>
 
-          <div style={{ width: "100%", marginBottom: "20px", position: "relative" }}>
-            <label style={{ color: "#f87171", fontSize: "12px" }}>Mot de passe</label>
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{
-                width: "100%",
-                background: "transparent",
-                border: "none",
-                borderBottom: "1px solid #f87171",
-                color: "white",
-                fontSize: "15px",
-                padding: "5px 0",
-                outline: "none",
-                boxSizing: "border-box",
-              }}
-            />
-            <span
-              onClick={() => setShowPassword(!showPassword)}
-              style={{
-                position: "absolute",
-                right: 0,
-                bottom: 5,
-                color: "#9ca3af",
-                fontSize: "12px",
-                cursor: "pointer",
-              }}
-            >
-              {showPassword ? "Cacher" : "Voir"}
-            </span>
-          </div>
+          {/* MOT DE PASSE */}
+          {!resetMode && (
+            <div style={{ width: "100%", marginBottom: "20px", position: "relative" }}>
+              <label style={{ color: "#f87171", fontSize: "12px" }}>Mot de passe</label>
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{
+                  width: "100%",
+                  background: "transparent",
+                  border: "none",
+                  borderBottom: "1px solid #f87171",
+                  color: "white",
+                  fontSize: "15px",
+                  padding: "5px 0",
+                  outline: "none",
+                  boxSizing: "border-box",
+                }}
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: "absolute",
+                  right: 0,
+                  bottom: 5,
+                  color: "#9ca3af",
+                  fontSize: "12px",
+                  cursor: "pointer",
+                }}
+              >
+                {showPassword ? "Cacher" : "Voir"}
+              </span>
+            </div>
+          )}
 
+          {/* BOUTON PRINCIPAL */}
           <button
-            onClick={handleLogin}
+            onClick={resetMode ? handleResetPassword : handleLogin}
             style={{
               width: "100%",
               padding: "12px",
-              background: "linear-gradient(to right, #f43f5e, #fb923c)",
+              background: resetMode
+                ? "linear-gradient(to right, #2563eb, #06b6d4)"
+                : "linear-gradient(to right, #f43f5e, #fb923c)",
               color: "white",
               border: "none",
               borderRadius: "25px",
@@ -152,21 +182,29 @@ export default function Connexion() {
               marginBottom: "15px",
             }}
           >
-            Se connecter
+            {resetMode ? "Envoyer le lien" : "Se connecter"}
           </button>
 
+          {/* LIENS */}
           <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-            <span style={{ color: "#9ca3af", fontSize: "12px", cursor: "pointer" }}>
-              Mot de passe oublié ?
+            <span
+              onClick={() => {
+                setResetMode(!resetMode);
+                setMessage("");
+              }}
+              style={{ color: "#9ca3af", fontSize: "12px", cursor: "pointer" }}
+            >
+              {resetMode ? "← Retour" : "Mot de passe oublié ?"}
             </span>
-
-            <a href="/inscription" style={{ color: "#9ca3af", fontSize: "12px" }}>
-              S'inscrire
-            </a>
+            {!resetMode && (
+              <a href="/inscription" style={{ color: "#9ca3af", fontSize: "12px" }}>
+                S'inscrire
+              </a>
+            )}
           </div>
 
           {message && (
-            <p style={{ color: "red", fontSize: "12px", marginTop: "10px" }}>
+            <p style={{ color: messageColor, fontSize: "12px", marginTop: "10px", textAlign: "center" }}>
               {message}
             </p>
           )}
